@@ -1,13 +1,25 @@
 import React from 'react';
 import './App.css';
-import Card from './Card';
+import List from './List';
 
 
-function App() {
+function App({store}) {
   return (
-    <div className="App">
-      {props.children}
-    </div>
+    <main class="App">
+      <header class="App-header">
+        <h1>Trelloyes!</h1>
+      </header>
+      <div class="App-list">
+        {store.lists.map( (item, index) => {
+          const cards = item.cardIds.map(cardId => store.allCards[cardId])
+          return <List 
+          header={item.header} 
+          key={index}
+          cards={cards}/>
+        }
+        )}
+      </div>
+    </main>
   );
 }
 
